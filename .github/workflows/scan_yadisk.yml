@@ -1,0 +1,31 @@
+name: Scan Yandex Disk Tree
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */6 * * *'  # Every 6 hours
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Run Yandex Disk scanner
+        env:
+          PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
+        run: node ydisk_tree.js
+      
+      - name: Upload tree.csv artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ydisk-tree
+          path: tree.csv
+          retention-days: 90
