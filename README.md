@@ -1,5 +1,68 @@
 # TestExcel
 
+## Meme Generator (Генератор Мемов) 🎭
+
+A simple, web-based meme generator that allows you to create memes with custom text overlays on images.
+
+### Features
+
+- 📁 Upload your own images
+- 🖼️ Use popular meme templates
+- ✏️ Add top and bottom text
+- 🎨 Customize font size, color, and style
+- 💾 Download your memes as PNG files
+- 🌐 Works entirely in the browser (no server needed)
+
+### How to Use
+
+1. **Open the Meme Generator**
+   - Simply open `meme-generator.html` in your web browser
+   - Or visit the GitHub Pages URL (if hosted)
+
+2. **Choose an Image**
+   - Click "Загрузить изображение" to upload your own image
+   - Or select one of the popular meme templates
+
+3. **Add Text**
+   - Enter text in the "Верхний текст" field for top text
+   - Enter text in the "Нижний текст" field for bottom text
+   - The meme updates automatically as you type
+
+4. **Customize**
+   - Adjust font size (10-100)
+   - Change text color
+   - Change stroke/outline color
+   - Select different fonts
+
+5. **Download**
+   - Click "Скачать мем" to download your creation
+
+### Local Usage
+
+No installation required! Just open the HTML file:
+
+```bash
+# On macOS
+open meme-generator.html
+
+# On Linux
+xdg-open meme-generator.html
+
+# On Windows
+start meme-generator.html
+```
+
+Or use a local web server:
+
+```bash
+# Python 3
+python -m http.server 8000
+
+# Then open http://localhost:8000/meme-generator.html
+```
+
+---
+
 ## Yandex Disk Tree Scanner
 
 This repository includes a GitHub Actions workflow that automatically scans a public Yandex Disk share and generates a CSV file with the complete folder structure.
