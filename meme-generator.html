@@ -323,7 +323,7 @@
             { name: 'Драйк', url: 'https://i.imgflip.com/30b1gx.jpg' },
             { name: 'Отвлечённый парень', url: 'https://i.imgflip.com/1ur9b0.jpg' },
             { name: 'Изменяется моё мнение', url: 'https://i.imgflip.com/24y43o.jpg' },
-            { name: 'Два кнопки', url: 'https://i.imgflip.com/1g8my4.jpg' }
+            { name: 'Две кнопки', url: 'https://i.imgflip.com/1g8my4.jpg' }
         ];
 
         // Load templates
@@ -344,11 +344,14 @@
         // Load template image
         function loadTemplateImage(url) {
             const img = new Image();
+            // Note: CORS may prevent downloading memes from external templates
+            // Users should upload their own images for full functionality
             img.crossOrigin = 'anonymous';
             img.onload = () => {
                 currentImage = img;
-                setupCanvas(img);
-                generateMeme();
+                if (setupCanvas(img)) {
+                    generateMeme();
+                }
             };
             img.onerror = () => {
                 alert('Не удалось загрузить шаблон. Попробуйте загрузить своё изображение.');
@@ -365,8 +368,9 @@
                     const img = new Image();
                     img.onload = function() {
                         currentImage = img;
-                        setupCanvas(img);
-                        generateMeme();
+                        if (setupCanvas(img)) {
+                            generateMeme();
+                        }
                     };
                     img.src = event.target.result;
                 };
@@ -376,10 +380,17 @@
 
         // Setup canvas dimensions
         function setupCanvas(img) {
+            // Validate image dimensions
+            if (!img.width || !img.height || img.width <= 0 || img.height <= 0) {
+                alert('Неверный размер изображения!');
+                return false;
+            }
+            
             const maxWidth = 600;
             const scale = maxWidth / img.width;
             canvas.width = maxWidth;
             canvas.height = img.height * scale;
+            return true;
         }
 
         // Generate meme
